@@ -1,4 +1,4 @@
-package view;
+package src.view;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;

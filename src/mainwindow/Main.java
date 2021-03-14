@@ -1,12 +1,12 @@
-package mainwindow;
+package src.mainwindow;
 
-import controller.MenuController;
+import src.controller.MenuController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import model.MenuItems;
-import view.MainView;
+import src.model.MenuItems;
+import src.view.MainView;
 
 public class Main extends Application {
     private static Stage s;

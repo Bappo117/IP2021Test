@@ -1,16 +1,14 @@
-package view;
+package src.view;
 
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import mainwindow.Main;
-import model.MenuItems;
+import src.mainwindow.Main;
+import src.model.MenuItems;
 
 public class MainView extends BorderPane {
     private MenuItems mi = new MenuItems();

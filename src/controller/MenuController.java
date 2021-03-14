@@ -1,4 +1,4 @@
-package controller;
+package src.controller;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -8,9 +8,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import mainwindow.Main;
-import model.MenuItems;
-import view.MainView;
+import src.mainwindow.Main;
+import src.model.MenuItems;
+import src.view.MainView;
 
 public class MenuController {
     private MenuItems mi;
