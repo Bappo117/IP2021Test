@@ -11,13 +11,13 @@ public class Buildings extends Consumers{
     }
 
 
-    public int getHours() {
+    public int getHours(){
         return hours;
     }
-    public int getNumberOfX() {
+    public int getNumberOfX(){
         return numberOfX;
     }
-    public int getConsumption() {
+    public int getConsumption(){
         return consumption;
     }
 
