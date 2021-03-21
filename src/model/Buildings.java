@@ -1,8 +1,7 @@
 package src.model;
 
-public class Houses extends Consumers{
-
-    public Houses (int consumption,int hours,int numOfX){
+public class Buildings extends Consumers{
+    public Buildings (int consumption,int hours,int numOfX){
         this.consumption = consumption;
         this.hours = hours;
         this.numberOfX = numOfX;
@@ -19,15 +18,17 @@ public class Houses extends Consumers{
         return consumption;
     }
 
+
     public void setHours(int hours){
         this.hours = hours;
     }
-    public void setNumberOfX(int numberOfX){
-        this.numberOfX = numberOfX;
+    public void setNumberOfX(int hours){
+        this.hours = hours;
     }
-    public void setConsumption(int consumption){
-        this.consumption = consumption;
+    public void setConsumption(int hours){
+        this.hours = hours;
     }
+
 
 
 }

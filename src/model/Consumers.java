@@ -1,6 +1,9 @@
 package src.model;
 
-public class Consumers extends Objects{
-    int consumption;
+public abstract class Consumers extends Objects {
+    protected int consumption;
+
+    public abstract int getConsumption();
+    public abstract void setConsumption(int consumption);
 
 }

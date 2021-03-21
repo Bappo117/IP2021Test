@@ -1,6 +1,8 @@
 package src.model;
 
-public class Suppliers extends Objects{
-    int power;
+public abstract class Suppliers extends Objects{
+    protected int power;
 
+    public abstract int getPower();
+    public abstract void setPower(int power);
 }
