@@ -1,10 +1,13 @@
 package src.model;
 
-public class Windfarm extends Suppliers{
+public class WindFarm extends Suppliers{
 
-    public Windfarm (int power,int hours,int numOfX){
+    public WindFarm(int power, int hours, int numOfX){
         this.power = power;
-        this.hours = hours;
+        if(hours > 168) {
+            this.hours = 168;
+        }
+        else this.hours = hours;
         this.numberOfX = numOfX;
     }
 

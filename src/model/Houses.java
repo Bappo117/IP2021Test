@@ -4,7 +4,10 @@ public class Houses extends Consumers{
 
     public Houses (int consumption,int hours,int numOfX){
         this.consumption = consumption;
-        this.hours = hours;
+        if(hours > 168) {
+            this.hours = 168;
+        }
+        else this.hours = hours;
         this.numberOfX = numOfX;
     }
 

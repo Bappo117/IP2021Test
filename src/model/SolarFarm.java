@@ -4,7 +4,10 @@ public class SolarFarm extends Suppliers{
 
     public SolarFarm (int power,int hours,int numOfX){
         this.power = power;
-        this.hours = hours;
+        if(hours > 168) {
+            this.hours = 168;
+        }
+        else this.hours = hours;
         this.numberOfX = numOfX;
     }
 
