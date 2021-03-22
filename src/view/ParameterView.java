@@ -1,4 +1,4 @@
-package view;
+package src.view;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -34,7 +34,7 @@ public class ParameterView extends Pane {
 
         //Add Images
         //House
-        Image house = new Image(new FileInputStream("C:\\Users\\aless\\IdeaProjects\\IP_Project_2021\\images\\house.png"));
+        Image house = new Image(new FileInputStream("images/house.png"));
         ImageView ivHouse = new ImageView(house);
         ivHouse.setFitHeight(30);
         ivHouse.setFitWidth(30);
@@ -42,7 +42,7 @@ public class ParameterView extends Pane {
         ivHouse.relocate(45, 40);
 
         //Building
-        Image building = new Image(new FileInputStream("C:\\Users\\aless\\IdeaProjects\\IP_Project_2021\\images\\building.png"));
+        Image building = new Image(new FileInputStream("images/building.png"));
         ImageView ivBuilding = new ImageView(building);
         ivBuilding.setFitHeight(30);
         ivBuilding.setFitWidth(30);
@@ -51,7 +51,7 @@ public class ParameterView extends Pane {
 
 
         //Water Dam
-        Image waterdam = new Image(new FileInputStream("C:\\Users\\aless\\IdeaProjects\\IP_Project_2021\\images\\waterdam.png"));
+        Image waterdam = new Image(new FileInputStream("images/waterdam.png"));
         ImageView ivWaterDam = new ImageView(waterdam);
         ivWaterDam.setFitHeight(35);
         ivWaterDam.setFitWidth(35);
@@ -59,7 +59,7 @@ public class ParameterView extends Pane {
         ivWaterDam.relocate(160, 40);
 
         //Wind Turbine
-        Image windturbine = new Image(new FileInputStream("C:\\Users\\aless\\IdeaProjects\\IP_Project_2021\\images\\windturbine.png"));
+        Image windturbine = new Image(new FileInputStream("images/windturbine.png"));
         ImageView ivWindTurbine = new ImageView(windturbine);
         ivWindTurbine.setFitHeight(30);
         ivWindTurbine.setFitWidth(30);
@@ -67,7 +67,7 @@ public class ParameterView extends Pane {
         ivWindTurbine.relocate(160, 80);
 
         //Solar Panel
-        Image solarpanel = new Image(new FileInputStream("C:\\Users\\aless\\IdeaProjects\\IP_Project_2021\\images\\solarpanel.png"));
+        Image solarpanel = new Image(new FileInputStream("images/solarpanel.png"));
         ImageView ivSolarPanel = new ImageView(solarpanel);
         ivSolarPanel.setFitHeight(30);
         ivSolarPanel.setFitWidth(30);
@@ -75,7 +75,7 @@ public class ParameterView extends Pane {
         ivSolarPanel.relocate(160, 120);
 
         //Nuclear Power Plant
-        Image npp = new Image(new FileInputStream("C:\\Users\\aless\\IdeaProjects\\IP_Project_2021\\images\\npp.png"));
+        Image npp = new Image(new FileInputStream("images/npp.png"));
         ImageView ivNpp = new ImageView(npp);
         ivNpp.setFitHeight(30);
         ivNpp.setFitWidth(30);

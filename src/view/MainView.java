@@ -10,6 +10,8 @@ import javafx.scene.text.Text;
 import src.mainwindow.Main;
 import src.model.MenuItems;
 
+import java.io.FileNotFoundException;
+
 public class MainView extends BorderPane {
     private MenuItems mi = new MenuItems();
     private ObservableList<MenuItems> fileData = mi.getFileItems();
@@ -17,7 +19,7 @@ public class MainView extends BorderPane {
     private MenuBar mb = new MenuBar();
     ParameterView pv = new ParameterView();
 
-    public MainView(){
+    public MainView()throws FileNotFoundException {
         super();
 
         Menu fileMenu = new Menu("_File");
