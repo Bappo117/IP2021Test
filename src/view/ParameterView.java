@@ -2,20 +2,34 @@ package src.view;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import src.model.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class ParameterView extends Pane {
     RadioButton[] rbList = new RadioButton[6];
     private final ToggleGroup group = new ToggleGroup();
+    Button gb;
+
+    //Button generateButton = new Button("Generate");
+
+    TextField t1;
+    TextField t2;
+    TextField t3;
+
+    ArrayList<Consumers> consumersList = new ArrayList<>();
+    ArrayList<Suppliers> suppliersList = new ArrayList<>();
 
     public ParameterView() throws FileNotFoundException {
         super();
@@ -87,6 +101,11 @@ public class ParameterView extends Pane {
         text1.relocate(25, 255);
 
         TextField firstTextField = new TextField();
+
+
+        t1 = firstTextField;
+
+
         //testTextField.setPromptText("Enter a number"); If needed to put text inside of TextField
         firstTextField.setFocusTraversable(false); //Used to not prompt as the program starts
         firstTextField.setDisable(false); //Used to disable a text field
@@ -99,6 +118,10 @@ public class ParameterView extends Pane {
         text2.relocate(25, 305);
 
         TextField secondTextField = new TextField();
+
+        t2 = secondTextField;
+
+
         //testTextField.setPromptText("Enter a number"); If needed to put text inside of TextField
         secondTextField.setFocusTraversable(false); //Used to not prompt as the program starts
         secondTextField.setDisable(false); //Used to disable a text field
@@ -111,6 +134,10 @@ public class ParameterView extends Pane {
         text3.relocate(25, 355);
 
         TextField thirdTextField = new TextField();
+
+        t3 = thirdTextField;
+
+
         //testTextField.setPromptText("Enter a number"); If needed to put text inside of TextField
         thirdTextField.setFocusTraversable(false); //Used to not prompt as the program starts
         thirdTextField.setDisable(false); //Used to disable a text field
@@ -120,6 +147,7 @@ public class ParameterView extends Pane {
 
         //Generate Button
         Button generateButton = new Button("Generate");
+        gb = generateButton;
         generateButton.relocate(125, 400);
 
         this.getChildren().add(rbList[0]);
@@ -161,6 +189,88 @@ public class ParameterView extends Pane {
                 }
             }
         });
+
+        generateButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(rbList[0].isSelected() && consumersList.size() < 40){
+                    int numOfCons = Integer.parseInt(firstTextField.getText());
+                    int hrsOfConsumption = Integer.parseInt(secondTextField.getText());
+                    Houses h1 = new Houses(50, hrsOfConsumption, numOfCons);
+                    consumersList.add(h1);
+                    firstTextField.clear();
+                    secondTextField.clear();
+                    rbList[0].setSelected(false);
+
+                    ImageView ivh = new ImageView(house);
+                    ivh.setFitWidth(128);
+                    ivh.setFitWidth(128);
+                }else if(rbList[1].isSelected() && consumersList.size() < 40){
+                    int numOfCons = Integer.parseInt(firstTextField.getText());
+                    int hrsOfConsumption = Integer.parseInt(secondTextField.getText());
+                    Buildings b1 = new Buildings(200, hrsOfConsumption, numOfCons);
+                    consumersList.add(b1);
+                    firstTextField.clear();
+                    secondTextField.clear();
+                    rbList[1].setSelected(false);
+                }else if(rbList[2].isSelected() && suppliersList.size() < 40){
+                    int numOfSup = Integer.parseInt(thirdTextField.getText());
+                    HydroDam hd1 = new HydroDam(1000, numOfSup);
+                    suppliersList.add(hd1);
+                    thirdTextField.clear();
+                    rbList[2].setSelected(false);
+                }else if(rbList[3].isSelected()  && suppliersList.size() < 40){
+                    int numOfSup = Integer.parseInt(thirdTextField.getText());
+                    WindFarm wf1 = new WindFarm(1500, numOfSup);
+                    suppliersList.add(wf1);
+                    thirdTextField.clear();
+                    rbList[3].setSelected(false);
+                }
+                else if(rbList[4].isSelected()  && suppliersList.size() < 40){
+                    int numOfSup = Integer.parseInt(thirdTextField.getText());
+                    SolarFarm sf1 = new SolarFarm(750, numOfSup);
+                    suppliersList.add(sf1);
+                    thirdTextField.clear();
+                    rbList[4].setSelected(false);
+                }else if(rbList[5].isSelected()  && suppliersList.size() < 40){
+                    int numOfSup = Integer.parseInt(thirdTextField.getText());
+                    NuclearPowerPlant npp1 = new NuclearPowerPlant(500, numOfSup);
+                    suppliersList.add(npp1);
+                    thirdTextField.clear();
+                    rbList[5].setSelected(false);
+                }else if(consumersList.size() == 40 || suppliersList.size() == 40){
+                    System.out.println("This is the maximum amount of objects (40)");
+                    rbList[0].setSelected(false);
+                    rbList[1].setSelected(false);
+                    rbList[2].setSelected(false);
+                    rbList[3].setSelected(false);
+                    rbList[4].setSelected(false);
+                    rbList[5].setSelected(false);
+                    firstTextField.clear();
+                    secondTextField.clear();
+                    thirdTextField.clear();
+                }
+                System.out.println(consumersList);
+                System.out.println(suppliersList);
+            }
+        });
+
+        /*GridPane gp = new GridPane();
+        for(Consumers c: consumersList){
+            if(c.getName().equals("house"))
+            ImageView ivh = new ImageView(house);
+            ivh.setFitHeight(100);
+            ivh.setFitWidth(128);
+            gp.add(ivh, 0, 0);
+        }*/
+    }
+
+    public ArrayList<Consumers> getConsumersList() {
+        return consumersList;
+    }
+
+    public ArrayList<Suppliers> getSuppliersList() {
+        return suppliersList;
     }
 
     public RadioButton[] getRbList(){

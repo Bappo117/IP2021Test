@@ -5,12 +5,8 @@ public class HydroDam extends Suppliers{
     int power = 1000;
     int totalProduction;
 
-    public HydroDam (int power,int hours,int numOfX){
+    public HydroDam (int power,int numOfX){
         this.power = power;
-        if(hours > 168) {
-            this.hours = 168;
-        }
-        else this.hours = hours;
         this.numberOfX = numOfX;
     }
 
@@ -34,6 +30,10 @@ public class HydroDam extends Suppliers{
     }
     public void setPower(int power){
         this.power = power;
+    }
+
+    public String toString(){
+        return getPower() + " kW/H " + getNumberOfX() + " hydrodams";
     }
 
     @Override

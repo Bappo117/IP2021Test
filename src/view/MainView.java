@@ -4,12 +4,15 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import src.mainwindow.Main;
 import src.model.MenuItems;
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class MainView extends BorderPane {
@@ -41,7 +44,8 @@ public class MainView extends BorderPane {
         Scene scene = Main.getParaScene();
 
         VBox supplierVBox = new VBox();
-        supplierVBox.getChildren().add(new Text("Supplier section"));
+        //supplierVBox.getChildren().add(new Text("Supplier section"));
+
         try {
             supplierVBox.setPrefSize(scene.getWidth()*0.4, scene.getHeight());
         }catch(Exception e){
@@ -51,8 +55,7 @@ public class MainView extends BorderPane {
 
 
         VBox consumerVBox = new VBox();
-        consumerVBox.getChildren().add(new Text("Consumer section"));
-
+        //consumerVBox.getChildren().add(new Text("Consumer section"));
         Line line1 = new Line(scene.getWidth()*0.4, 0, scene.getWidth()*0.4, scene.getHeight());
 
         try {
@@ -94,7 +97,6 @@ public class MainView extends BorderPane {
 */
         //CHANGE THE POSITION OF THE PARAMETER SECTION IN THE @ParameterView CLASS TO CUSTOMIZE THE WHOLE SECTION
         parameterVBox.getChildren().add(pv);
-
     }
 
     public void setOptionsHandler(EventHandler handler){

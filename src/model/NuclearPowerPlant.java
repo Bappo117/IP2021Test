@@ -5,12 +5,8 @@ public class NuclearPowerPlant extends Suppliers{
     int power = 500;
     int totalProduction;
 
-    public NuclearPowerPlant (int power,int hours,int numOfX){
+    public NuclearPowerPlant (int power, int numOfX){
         this.power = power;
-        if(hours > 168) {
-            this.hours = 168;
-        }
-        else this.hours = hours;
         this.numberOfX = numOfX;
     }
 
@@ -41,6 +37,10 @@ public class NuclearPowerPlant extends Suppliers{
 
     public void setTotalProduction(int totalProduction) {
         this.totalProduction = totalProduction;
+    }
+
+    public String toString(){
+        return getPower() + " kW/H " + getNumberOfX() + " power plants";
     }
 
     @Override

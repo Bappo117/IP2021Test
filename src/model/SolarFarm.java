@@ -5,12 +5,8 @@ public class SolarFarm extends Suppliers{
     int power = 750;
     int totalProduction;
 
-    public SolarFarm (int power,int hours,int numOfX){
+    public SolarFarm (int power, int numOfX){
         this.power = 750;
-        if(hours > 168) {
-            this.hours = 168;
-        }
-        else this.hours = hours;
         this.numberOfX = numOfX;
     }
 
@@ -41,6 +37,10 @@ public class SolarFarm extends Suppliers{
 
     public void setTotalProduction(int totalProduction) {
         this.totalProduction = totalProduction;
+    }
+
+    public String toString(){
+        return getPower() + " kW/H " + getNumberOfX() + " solar panels";
     }
 
     @Override

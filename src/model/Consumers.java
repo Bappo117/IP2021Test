@@ -6,6 +6,7 @@ public abstract class Consumers extends Objects {
 
     public abstract int getConsumption();
     public abstract void setConsumption(int consumption);
+    public abstract String getName();
 
     public abstract void totalConsumption(int consumption, int hours, int numberOfX);
 

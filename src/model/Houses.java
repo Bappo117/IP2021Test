@@ -4,14 +4,16 @@ public class Houses extends Consumers{
 
     int consumption = 50;
     int totalConsumption;
+    String name;
 
     public Houses (int consumption,int hours,int numOfX){
-        this.consumption = consumption;
+        this.consumption = consumption ;
         if(hours > 168) {
             this.hours = 168;
         }
         else this.hours = hours;
         this.numberOfX = numOfX;
+        this.name = "house";
     }
 
 
@@ -39,8 +41,21 @@ public class Houses extends Consumers{
         this.consumption = consumption;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public void setTotalConsumption(int totalConsumption) {
         this.totalConsumption = totalConsumption;
+    }
+
+    @Override
+    public String toString(){
+        return getConsumption() + " kW/H " + getHours() + " hrs " + getNumberOfX() + " houses";
     }
 
     @Override

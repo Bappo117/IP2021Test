@@ -4,6 +4,7 @@ public class Buildings extends Consumers{
 
     int consumption = 200;
     int totalConsumption;
+    String name;
 
     public Buildings (int consumption,int hours,int numOfX){
         this.consumption = consumption;
@@ -12,6 +13,7 @@ public class Buildings extends Consumers{
         }
         else this.hours = hours;
         this.numberOfX = numOfX;
+        this.name = "buildings";
     }
 
 
@@ -41,6 +43,20 @@ public class Buildings extends Consumers{
 
     public void setTotalConsumption(int totalConsumption) {
         this.totalConsumption = totalConsumption;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString(){
+        return getConsumption() + " kW/H " + getHours() + " hrs " + getNumberOfX() + " buildings";
     }
 
     public void totalConsumption(int consumption, int hours, int numberOfX) {

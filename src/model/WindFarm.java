@@ -5,12 +5,8 @@ public class WindFarm extends Suppliers{
     int power = 1500;
     int totalProduction;
 
-    public WindFarm(int power, int hours, int numOfX){
+    public WindFarm(int power, int numOfX){
         this.power = power;
-        if(hours > 168) {
-            this.hours = 168;
-        }
-        else this.hours = hours;
         this.numberOfX = numOfX;
     }
 
@@ -37,6 +33,10 @@ public class WindFarm extends Suppliers{
         this.power = power;
     }
     public void setTotalProduction(int totalProduction){ this.totalProduction = totalProduction; }
+
+    public String toString(){
+        return getPower() + " kW/H " + getNumberOfX() + " wind turbines";
+    }
 
     @Override
     public void totalProduction(int power, int hours) {
