@@ -1,6 +1,10 @@
 package src.model;
 
 public class Buildings extends Consumers{
+
+    int consumption = 200;
+    int totalConsumption;
+
     public Buildings (int consumption,int hours,int numOfX){
         this.consumption = consumption;
         if(hours > 168) {
@@ -21,6 +25,9 @@ public class Buildings extends Consumers{
         return consumption;
     }
 
+    public int getTotalConsumption() {
+        return totalConsumption;
+    }
 
     public void setHours(int hours){
         this.hours = hours;
@@ -32,6 +39,13 @@ public class Buildings extends Consumers{
         this.hours = hours;
     }
 
+    public void setTotalConsumption(int totalConsumption) {
+        this.totalConsumption = totalConsumption;
+    }
+
+    public void totalConsumption(int consumption, int hours, int numberOfX) {
+        this.totalConsumption = this.consumption*this.hours*this.numberOfX;
+    }
 
 
 }

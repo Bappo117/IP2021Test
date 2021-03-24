@@ -2,6 +2,9 @@ package src.model;
 
 public class HydroDam extends Suppliers{
 
+    int power = 1000;
+    int totalProduction;
+
     public HydroDam (int power,int hours,int numOfX){
         this.power = power;
         if(hours > 168) {
@@ -33,4 +36,8 @@ public class HydroDam extends Suppliers{
         this.power = power;
     }
 
+    @Override
+    public void totalProduction(int power, int hours){
+        this.totalProduction = this.power*this.hours;
+    }
 }

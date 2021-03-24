@@ -2,6 +2,9 @@ package src.model;
 
 public class NuclearPowerPlant extends Suppliers{
 
+    int power = 500;
+    int totalProduction;
+
     public NuclearPowerPlant (int power,int hours,int numOfX){
         this.power = power;
         if(hours > 168) {
@@ -22,6 +25,9 @@ public class NuclearPowerPlant extends Suppliers{
         return power;
     }
 
+    public int getTotalProduction() {
+        return totalProduction;
+    }
 
     public void setHours(int hours){
         this.hours = hours;
@@ -31,6 +37,15 @@ public class NuclearPowerPlant extends Suppliers{
     }
     public void setPower(int power){
         this.power = power;
+    }
+
+    public void setTotalProduction(int totalProduction) {
+        this.totalProduction = totalProduction;
+    }
+
+    @Override
+    public void totalProduction(int power, int hours) {
+        this.totalProduction = this.power*this.hours;
     }
 
 }

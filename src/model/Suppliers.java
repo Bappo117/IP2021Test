@@ -5,4 +5,6 @@ public abstract class Suppliers extends Objects{
 
     public abstract int getPower();
     public abstract void setPower(int power);
+
+    public abstract void totalProduction(int power, int hours);
 }
