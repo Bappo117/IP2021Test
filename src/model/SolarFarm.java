@@ -4,10 +4,12 @@ public class SolarFarm extends Suppliers{
 
     int power = 750;
     int totalProduction;
+    String name;
 
     public SolarFarm (int power, int numOfX){
         this.power = 750;
         this.numberOfX = numOfX;
+        this.name = "solarpanel";
     }
 
 
@@ -33,6 +35,13 @@ public class SolarFarm extends Suppliers{
     }
     public void setPower(int power){
         this.power = power;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setTotalProduction(int totalProduction) {

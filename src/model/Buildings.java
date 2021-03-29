@@ -13,7 +13,7 @@ public class Buildings extends Consumers{
         }
         else this.hours = hours;
         this.numberOfX = numOfX;
-        this.name = "buildings";
+        this.name = "building";
     }
 
 

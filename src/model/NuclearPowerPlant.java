@@ -4,10 +4,12 @@ public class NuclearPowerPlant extends Suppliers{
 
     int power = 500;
     int totalProduction;
+    String name;
 
     public NuclearPowerPlant (int power, int numOfX){
         this.power = power;
         this.numberOfX = numOfX;
+        this.name = "npp";
     }
 
 
@@ -33,6 +35,13 @@ public class NuclearPowerPlant extends Suppliers{
     }
     public void setPower(int power){
         this.power = power;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setTotalProduction(int totalProduction) {

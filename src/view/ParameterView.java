@@ -31,6 +31,8 @@ public class ParameterView extends Pane {
     ArrayList<Consumers> consumersList = new ArrayList<>();
     ArrayList<Suppliers> suppliersList = new ArrayList<>();
 
+    Button generateButton;
+
     public ParameterView() throws FileNotFoundException {
         super();
 
@@ -146,7 +148,7 @@ public class ParameterView extends Pane {
         thirdTextField.relocate(190, 350);
 
         //Generate Button
-        Button generateButton = new Button("Generate");
+        /*Button*/ generateButton = new Button("Generate");
         gb = generateButton;
         generateButton.relocate(125, 400);
 
@@ -190,7 +192,7 @@ public class ParameterView extends Pane {
             }
         });
 
-        generateButton.setOnAction(new EventHandler<ActionEvent>() {
+        /*generateButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 if(rbList[0].isSelected() && consumersList.size() < 40){
@@ -204,7 +206,7 @@ public class ParameterView extends Pane {
 
                     ImageView ivh = new ImageView(house);
                     ivh.setFitWidth(128);
-                    ivh.setFitWidth(128);
+                    ivh.setFitHeight(100);
                 }else if(rbList[1].isSelected() && consumersList.size() < 40){
                     int numOfCons = Integer.parseInt(firstTextField.getText());
                     int hrsOfConsumption = Integer.parseInt(secondTextField.getText());
@@ -250,10 +252,15 @@ public class ParameterView extends Pane {
                     secondTextField.clear();
                     thirdTextField.clear();
                 }
+
+
                 System.out.println(consumersList);
                 System.out.println(suppliersList);
+
+                updateList();
+                System.out.println("cList: " + MainView.cList);
             }
-        });
+        });*/
 
         /*GridPane gp = new GridPane();
         for(Consumers c: consumersList){
@@ -263,6 +270,12 @@ public class ParameterView extends Pane {
             ivh.setFitWidth(128);
             gp.add(ivh, 0, 0);
         }*/
+        //updateList();
+    }
+
+    public void updateList(){
+        MainView.cList = consumersList;
+        MainView.sList = suppliersList;
     }
 
     public ArrayList<Consumers> getConsumersList() {

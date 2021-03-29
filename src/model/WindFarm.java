@@ -4,10 +4,12 @@ public class WindFarm extends Suppliers{
 
     int power = 1500;
     int totalProduction;
+    String name;
 
     public WindFarm(int power, int numOfX){
         this.power = power;
         this.numberOfX = numOfX;
+        this.name = "windturbine";
     }
 
 
@@ -33,6 +35,13 @@ public class WindFarm extends Suppliers{
         this.power = power;
     }
     public void setTotalProduction(int totalProduction){ this.totalProduction = totalProduction; }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String toString(){
         return getPower() + " kW/H " + getNumberOfX() + " wind turbines";

@@ -4,10 +4,12 @@ public class HydroDam extends Suppliers{
 
     int power = 1000;
     int totalProduction;
+    String name;
 
     public HydroDam (int power,int numOfX){
         this.power = power;
         this.numberOfX = numOfX;
+        this.name = "waterdam";
     }
 
 
@@ -30,6 +32,13 @@ public class HydroDam extends Suppliers{
     }
     public void setPower(int power){
         this.power = power;
+    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String toString(){
