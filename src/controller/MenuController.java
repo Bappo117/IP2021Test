@@ -23,39 +23,11 @@ public class MenuController {
         this.mi = menuI;
         this.mv = menuV;
 
-        OptionsEventHandler oeh = new OptionsEventHandler();
-        mv.setOptionsHandler(oeh);
-
         CloseEventHandler ceh = new CloseEventHandler();
         mv.setCloseHandler(ceh);
 
         AboutEventHandler aeh = new AboutEventHandler();
         mv.setAboutHandler(aeh);
-    }
-
-    //Creates the Options window
-
-    class OptionsEventHandler implements EventHandler{
-        @Override
-        public void handle(Event event){
-            Pane root = new Pane();
-            Stage stage = new Stage();
-
-            VBox vb = new VBox();
-            Text t = new Text("Options");
-
-            vb.getChildren().add(t);
-            root.getChildren().add(vb);
-
-            Scene scene = new Scene(root, 500, 500);
-            stage.initModality(Modality.WINDOW_MODAL);
-            stage.initOwner(Main.getS());
-
-            stage.setTitle("Options");
-
-            stage.setScene(scene);
-            stage.showAndWait();
-        }
     }
 
     //Closes the application

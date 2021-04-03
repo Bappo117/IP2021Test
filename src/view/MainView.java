@@ -58,8 +58,6 @@ public class MainView extends BorderPane {
             helpMenu.getItems().add(new MenuItem(m.getItemName()));
         }
 
-        fileMenu.getItems().add(1, new SeparatorMenuItem());
-
         mb.getMenus().addAll(fileMenu, helpMenu);
 
         this.setTop(mb);
@@ -562,12 +560,8 @@ public class MainView extends BorderPane {
 
     //Event handlers for the different menus
 
-    public void setOptionsHandler(EventHandler handler){
-        mb.getMenus().get(0).getItems().get(0).setOnAction(handler);
-    }
-
     public void setCloseHandler(EventHandler handler){
-        mb.getMenus().get(0).getItems().get(2).setOnAction(handler);
+        mb.getMenus().get(0).getItems().get(0).setOnAction(handler);
     }
 
     public void setAboutHandler(EventHandler handler){
