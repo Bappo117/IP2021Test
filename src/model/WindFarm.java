@@ -50,8 +50,8 @@ public class WindFarm extends Suppliers{
     }
 
     @Override
-    public void totalProduction(int power, int hours) {
-        this.totalProduction = this.power*this.hours;
+    public void totalProduction(int power, int numOfX) {
+        this.totalProduction = this.power*this.numberOfX;
     }
 
 }

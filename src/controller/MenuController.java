@@ -119,8 +119,9 @@ public class MenuController {
             vb.getChildren().add(five);
 
             sp.setContent(vb);
-            Scene scene = new Scene(sp, 500, 500);
+            Scene scene = new Scene(sp, 1000, 500);
             stage.initModality(Modality.WINDOW_MODAL);
+            stage.setResizable(false);
             stage.initOwner(Main.getS());
 
             stage.setTitle("About");

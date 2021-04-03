@@ -18,6 +18,7 @@ public class ParameterView extends Pane {
     RadioButton[] rbList = new RadioButton[6];
     private final ToggleGroup group = new ToggleGroup();
     Button gb;
+    Button reset;
 
     TextField t1;
     TextField t2;
@@ -27,6 +28,9 @@ public class ParameterView extends Pane {
     ArrayList<Suppliers> suppliersList = new ArrayList<>();
 
     Button generateButton;
+    Button resetButton;
+
+    Label consumptionNum, supplierNum, alertMessage, houseValue, buildingValue, hydroValue, windValue, solarValue, nppValue, houseNum, buildingNum, hydroNum, windNum, solarNum, nppNum;
 
     public ParameterView() throws FileNotFoundException {
         super();
@@ -142,6 +146,99 @@ public class ParameterView extends Pane {
         gb = generateButton;
         generateButton.relocate(125, 400);
 
+        //Reset Button
+        resetButton = new Button("Reset");
+        reset = resetButton;
+        resetButton.relocate(135, 435);
+
+        //Add Labels for consumption/supplier information
+        consumptionNum = new Label("Energy Consumed: ");
+        consumptionNum.setFont(Font.font(15));
+        consumptionNum.relocate(10, 550);
+
+        supplierNum = new Label("Energy Produced: ");
+        supplierNum.setFont(Font.font(15));
+        supplierNum.relocate(10, 650);
+
+        alertMessage = new Label("");
+        alertMessage.setFont(Font.font(12));
+        alertMessage.relocate(10, 475);
+
+        houseValue = new Label("(50 kW/h)");
+        houseValue.setFont(Font.font(10));
+        houseValue.relocate(77,45);
+
+        buildingValue = new Label("(200 kW/h)");
+        buildingValue.setFont(Font.font(10));
+        buildingValue.relocate(77, 85);
+
+        hydroValue = new Label("(1000 kW/h)");
+        hydroValue.setFont(Font.font(10));
+        hydroValue.relocate(200, 45);
+
+        windValue = new Label("(1500 kW/h)");
+        windValue.setFont(Font.font(10));
+        windValue.relocate(200, 85);
+
+        solarValue = new Label("(750 kW/h)");
+        solarValue.setFont(Font.font(10));
+        solarValue.relocate(200, 125);
+
+        nppValue = new Label("(500 kW/h)");
+        nppValue.setFont(Font.font(10));
+        nppValue.relocate(200, 165);
+
+        houseNum = new Label("");
+        houseNum.setFont(Font.font(12));
+        houseNum.relocate(80, 580);
+
+        buildingNum = new Label("");
+        buildingNum.setFont(Font.font(12));
+        buildingNum.relocate(80, 620);
+
+        hydroNum = new Label("");
+        hydroNum.setFont(Font.font(12));
+        hydroNum.relocate(80, 680);
+
+        windNum = new Label("");
+        windNum.setFont(Font.font(12));
+        windNum.relocate(80, 720);
+
+        solarNum = new Label("");
+        solarNum.setFont(Font.font(12));
+        solarNum.relocate(220, 680);
+
+        nppNum = new Label("");
+        nppNum.setFont(Font.font(12));
+        nppNum.relocate(220, 720);
+
+        //Add tiny images for consumer/supplier quantity
+        ImageView smallHouse = new ImageView(house);
+        smallHouse.setFitHeight(30);
+        smallHouse.setFitWidth(30);
+        ImageView smallBuilding = new ImageView(building);
+        smallBuilding.setFitHeight(30);
+        smallBuilding.setFitWidth(30);
+        ImageView smallHydro = new ImageView(waterdam);
+        smallHydro.setFitHeight(30);
+        smallHydro.setFitWidth(30);
+        ImageView smallWind = new ImageView(windturbine);
+        smallWind.setFitHeight(30);
+        smallWind.setFitWidth(30);
+        ImageView smallSolar = new ImageView(solarpanel);
+        smallSolar.setFitHeight(30);
+        smallSolar.setFitWidth(30);
+        ImageView smallNPP = new ImageView(npp);
+        smallNPP.setFitHeight(30);
+        smallNPP.setFitWidth(30);
+
+        smallHouse.relocate(10, 575);
+        smallBuilding.relocate(10, 615);
+        smallHydro.relocate(10, 675);
+        smallWind.relocate(10, 715);
+        smallSolar.relocate(150, 675);
+        smallNPP.relocate(150, 715);
+
         //Add RadioButtons
 
         this.getChildren().add(rbList[0]);
@@ -162,7 +259,9 @@ public class ParameterView extends Pane {
         this.getChildren().add(rbList[5]);
         rbList[5].relocate(130, 165);
 
-        this.getChildren().addAll(title, text1, text2, text3, firstTextField, secondTextField, thirdTextField, generateButton);
+        this.getChildren().addAll(title, text1, text2, text3, firstTextField, secondTextField, thirdTextField, generateButton, resetButton, consumptionNum, supplierNum, alertMessage,
+                                  smallHouse, smallBuilding, smallHydro, smallWind, smallSolar, smallNPP, houseNum, buildingNum, hydroNum, windNum, solarNum, nppNum,
+                                   houseValue, buildingValue, hydroValue, windValue, solarValue, nppValue);
 
 
         //RadioButton functionality
@@ -185,6 +284,20 @@ public class ParameterView extends Pane {
                 }
             }
         });
+    }
+
+    public void setEnergyLabel(double consNum, double suppNum){
+        this.consumptionNum.setText("Energy Consumed: " + consNum + " kW/h");
+        this.supplierNum.setText("Energy Produced: " + suppNum + " kW/h");
+    }
+
+    public void setNumberLabel(int hNum, int bNum, int hyNum, int wNum, int sNum, int nNum){
+        this.houseNum.setText(String.valueOf(hNum));
+        this.buildingNum.setText(String.valueOf(bNum));
+        this.hydroNum.setText(String.valueOf(hyNum));
+        this.windNum.setText(String.valueOf(wNum));
+        this.solarNum.setText(String.valueOf(sNum));
+        this.nppNum.setText(String.valueOf(nNum));
     }
 
     public void updateList(){

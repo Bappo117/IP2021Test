@@ -1,5 +1,6 @@
 package src.view;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
+import javafx.stage.Stage;
 import src.mainwindow.Main;
 import src.model.*;
 import java.io.FileNotFoundException;
@@ -30,6 +32,16 @@ public class MainView extends BorderPane {
 
     static int rowSupp = 0;
     static int colSupp = 0;
+
+    static double totCons = 0;
+    static double totSupp = 0;
+
+    static int houseNum = 0;
+    static int buildingNum = 0;
+    static int hydroNum = 0;
+    static int windNum = 0;
+    static int solarNum = 0;
+    static int nppNum = 0;
 
     public MainView() throws FileNotFoundException {
         super();
@@ -119,70 +131,11 @@ public class MainView extends BorderPane {
             @Override
             public void handle(ActionEvent event) {
 
-                //Creation of new objects
-
-                if(pv.rbList[0].isSelected() && pv.consumersList.size() < 40){
-                    int numOfCons = Integer.parseInt(pv.t1.getText());
-                    int hrsOfConsumption = Integer.parseInt(pv.t2.getText());
-                    Houses h1 = new Houses(50, hrsOfConsumption, numOfCons);
-                    pv.consumersList.add(h1);
-
-                    consumerArray.add(h1);
-
-                    pv.t1.clear();
-                    pv.t2.clear();
-                    pv.rbList[0].setSelected(false);
-
-                }else if(pv.rbList[1].isSelected() && pv.consumersList.size() < 40){
-                    int numOfCons = Integer.parseInt(pv.t1.getText());
-                    int hrsOfConsumption = Integer.parseInt(pv.t2.getText());
-                    Buildings b1 = new Buildings(200, hrsOfConsumption, numOfCons);
-                    pv.consumersList.add(b1);
-
-                    consumerArray.add(b1);
-
-                    pv.t1.clear();
-                    pv.t2.clear();
-                    pv.rbList[1].setSelected(false);
-                }else if(pv.rbList[2].isSelected() && pv.suppliersList.size() < 40){
-                    int numOfSup = Integer.parseInt(pv.t3.getText());
-                    HydroDam hd1 = new HydroDam(1000, numOfSup);
-                    pv.suppliersList.add(hd1);
-
-                    supplierArray.add(hd1);
-
-                    pv.t3.clear();
-                    pv.rbList[2].setSelected(false);
-                }else if(pv.rbList[3].isSelected()  && pv.suppliersList.size() < 40){
-                    int numOfSup = Integer.parseInt(pv.t3.getText());
-                    WindFarm wf1 = new WindFarm(1500, numOfSup);
-                    pv.suppliersList.add(wf1);
-
-                    supplierArray.add(wf1);
-
-                    pv.t3.clear();
-                    pv.rbList[3].setSelected(false);
-                }
-                else if(pv.rbList[4].isSelected()  && pv.suppliersList.size() < 40){
-                    int numOfSup = Integer.parseInt(pv.t3.getText());
-                    SolarFarm sf1 = new SolarFarm(750, numOfSup);
-                    pv.suppliersList.add(sf1);
-
-                    supplierArray.add(sf1);
-
-                    pv.t3.clear();
-                    pv.rbList[4].setSelected(false);
-                }else if(pv.rbList[5].isSelected()  && pv.suppliersList.size() < 40) {
-                    int numOfSup = Integer.parseInt(pv.t3.getText());
-                    NuclearPowerPlant npp1 = new NuclearPowerPlant(500, numOfSup);
-                    pv.suppliersList.add(npp1);
-
-                    supplierArray.add(npp1);
-
-                    pv.t3.clear();
-                    pv.rbList[5].setSelected(false);
-                }else if(pv.consumersList.size() == 40 || pv.suppliersList.size() == 40){
+                //Maximum amount of objects is 40
+                if(consumerArray.size() == 40 & supplierArray.size() == 40){
+                    System.out.println("SORRY");
                     System.out.println("This is the maximum amount of objects (40)");
+                    pv.alertMessage.setText("The maximum amount of objects has been reached (40)");
                     pv.rbList[0].setSelected(false);
                     pv.rbList[1].setSelected(false);
                     pv.rbList[2].setSelected(false);
@@ -193,6 +146,233 @@ public class MainView extends BorderPane {
                     pv.t2.clear();
                     pv.t3.clear();
                 }
+
+                //Creation of new objects
+                //Update Labels
+                    if (pv.rbList[0].isSelected() && pv.consumersList.size() < 40) {
+                        int numOfCons = Integer.parseInt(pv.t1.getText());
+                        int hrsOfConsumption = Integer.parseInt(pv.t2.getText());
+                        Houses h1 = new Houses(50, hrsOfConsumption, numOfCons);
+                        pv.consumersList.add(h1);
+
+                        consumerArray.add(h1);
+
+                        h1.totalConsumption(h1.getConsumption(), h1.getHours(), h1.getNumberOfX());
+                        totCons = totCons + h1.getTotalConsumption();
+                        pv.setEnergyLabel(totCons, totSupp);
+
+                        houseNum = houseNum + h1.getNumberOfX();
+                        pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+                        if(numOfCons < 1){
+                            pv.alertMessage.setText("Please enter an amount of consumers greater than 1");
+                            pv.consumersList.remove(h1);
+                            consumerArray.remove(h1);
+
+                            totCons = totCons - h1.getTotalConsumption();
+                            pv.setEnergyLabel(totCons, totSupp);
+
+                            houseNum = houseNum - h1.getNumberOfX();
+                            pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+                            pv.t1.clear();
+                            pv.t2.clear();
+                            pv.rbList[0].setSelected(false);
+                        }
+                        else if(hrsOfConsumption < 1){
+                            pv.alertMessage.setText("Please enter an amount of hours between 1 and 168");
+                            pv.consumersList.remove(h1);
+                            consumerArray.remove(h1);
+
+                            totCons = totCons - h1.getTotalConsumption();
+                            pv.setEnergyLabel(totCons, totSupp);
+
+                            houseNum = houseNum - h1.getNumberOfX();
+                            pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+                            pv.t1.clear();
+                            pv.t2.clear();
+                            pv.rbList[0].setSelected(false);
+                        }
+
+                        pv.t1.clear();
+                        pv.t2.clear();
+                        pv.rbList[0].setSelected(false);
+
+                    } else if (pv.rbList[1].isSelected() && pv.consumersList.size() < 40) {
+                        int numOfCons = Integer.parseInt(pv.t1.getText());
+                        int hrsOfConsumption = Integer.parseInt(pv.t2.getText());
+                        Buildings b1 = new Buildings(200, hrsOfConsumption, numOfCons);
+                        pv.consumersList.add(b1);
+
+                        consumerArray.add(b1);
+
+                        b1.totalConsumption(b1.getConsumption(), b1.getHours(), b1.getNumberOfX());
+                        totCons = totCons + b1.getTotalConsumption();
+                        pv.setEnergyLabel(totCons, totSupp);
+
+                        buildingNum = buildingNum + b1.getNumberOfX();
+                        pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+                        if(numOfCons < 1){
+                            pv.alertMessage.setText("Please enter an amount of consumers greater than 1");
+                            pv.consumersList.remove(b1);
+                            consumerArray.remove(b1);
+
+                            totCons = totCons - b1.getTotalConsumption();
+                            pv.setEnergyLabel(totCons, totSupp);
+
+                            buildingNum = buildingNum - b1.getNumberOfX();
+                            pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+                            pv.t1.clear();
+                            pv.t2.clear();
+                            pv.rbList[1].setSelected(false);
+                        }
+                        else if(hrsOfConsumption < 1){
+                            pv.alertMessage.setText("Please enter an amount of hours between 1 and 168");
+                            pv.consumersList.remove(b1);
+                            consumerArray.remove(b1);
+
+                            totCons = totCons - b1.getTotalConsumption();
+                            pv.setEnergyLabel(totCons, totSupp);
+
+                            buildingNum = buildingNum - b1.getNumberOfX();
+                            pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+                            pv.t1.clear();
+                            pv.t2.clear();
+                            pv.rbList[1].setSelected(false);
+                        }
+                        pv.t1.clear();
+                        pv.t2.clear();
+                        pv.rbList[1].setSelected(false);
+                    } else if (pv.rbList[2].isSelected() && pv.suppliersList.size() < 40) {
+                        int numOfSup = Integer.parseInt(pv.t3.getText());
+                        HydroDam hd1 = new HydroDam(1000, numOfSup);
+                        pv.suppliersList.add(hd1);
+
+                        supplierArray.add(hd1);
+
+                        hd1.totalProduction(hd1.getPower(), hd1.getNumberOfX());
+                        totSupp = totSupp + hd1.getTotalProduction();
+                        pv.setEnergyLabel(totCons, totSupp);
+
+                        hydroNum = hydroNum + hd1.getNumberOfX();
+                        pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+
+                        if(numOfSup < 1){
+                            pv.alertMessage.setText("Please enter an amount of producers greater than 1");
+                            pv.suppliersList.remove(hd1);
+
+                            supplierArray.remove(hd1);
+                            totSupp = totSupp - hd1.getTotalProduction();
+
+                            hydroNum = hydroNum - hd1.getNumberOfX();
+                            pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+                            pv.setEnergyLabel(totCons, totSupp);
+                            pv.t3.clear();
+                            pv.rbList[2].setSelected(false);
+                        }
+
+                        pv.t3.clear();
+                        pv.rbList[2].setSelected(false);
+                    } else if (pv.rbList[3].isSelected() && pv.suppliersList.size() < 40) {
+                        int numOfSup = Integer.parseInt(pv.t3.getText());
+                        WindFarm wf1 = new WindFarm(1500, numOfSup);
+                        pv.suppliersList.add(wf1);
+
+                        supplierArray.add(wf1);
+
+                        wf1.totalProduction(wf1.getPower(), wf1.getNumberOfX());
+                        totSupp = totSupp + wf1.getTotalProduction();
+                        pv.setEnergyLabel(totCons, totSupp);
+
+                        windNum = windNum + wf1.getNumberOfX();
+                        pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+                        if(numOfSup < 1){
+                            pv.alertMessage.setText("Please enter an amount of producers greater than 1");
+                            pv.suppliersList.remove(wf1);
+                            supplierArray.remove(wf1);
+
+                            totSupp = totSupp - wf1.getTotalProduction();
+                            pv.setEnergyLabel(totCons, totSupp);
+
+                            windNum = windNum - wf1.getNumberOfX();
+                            pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+                            pv.t3.clear();
+                            pv.rbList[3].setSelected(false);
+                        }
+
+                        pv.t3.clear();
+                        pv.rbList[3].setSelected(false);
+                    } else if (pv.rbList[4].isSelected() && pv.suppliersList.size() < 40) {
+                        int numOfSup = Integer.parseInt(pv.t3.getText());
+                        SolarFarm sf1 = new SolarFarm(750, numOfSup);
+                        pv.suppliersList.add(sf1);
+
+                        supplierArray.add(sf1);
+
+                        sf1.totalProduction(sf1.getPower(), sf1.getNumberOfX());
+                        totSupp = totSupp + sf1.getTotalProduction();
+                        pv.setEnergyLabel(totCons, totSupp);
+
+                        solarNum = solarNum + sf1.getNumberOfX();
+                        pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+                        if(numOfSup < 1){
+                            pv.alertMessage.setText("Please enter an amount of producers greater than 1");
+                            pv.suppliersList.remove(sf1);
+                            supplierArray.remove(sf1);
+
+                            totSupp = totSupp - sf1.getTotalProduction();
+                            pv.setEnergyLabel(totCons, totSupp);
+
+                            solarNum = solarNum - sf1.getNumberOfX();
+                            pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+                            pv.t3.clear();
+                            pv.rbList[4].setSelected(false);
+                        }
+
+                        pv.t3.clear();
+                        pv.rbList[4].setSelected(false);
+                    } else if (pv.rbList[5].isSelected() && pv.suppliersList.size() < 40) {
+                        int numOfSup = Integer.parseInt(pv.t3.getText());
+                        NuclearPowerPlant npp1 = new NuclearPowerPlant(500, numOfSup);
+                        pv.suppliersList.add(npp1);
+
+                        supplierArray.add(npp1);
+
+                        npp1.totalProduction(npp1.getPower(), npp1.getNumberOfX());
+                        totSupp = totSupp + npp1.getTotalProduction();
+                        pv.setEnergyLabel(totCons, totSupp);
+
+                        nppNum = nppNum + npp1.getNumberOfX();
+                        pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+                        if(numOfSup < 1){
+                            pv.alertMessage.setText("Please enter an amount of producers greater than 1");
+                            pv.suppliersList.remove(npp1);
+                            supplierArray.remove(npp1);
+
+                            totSupp = totSupp - npp1.getTotalProduction();
+                            pv.setEnergyLabel(totCons, totSupp);
+
+                            nppNum = nppNum - npp1.getNumberOfX();
+                            pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+
+                            pv.t3.clear();
+                            pv.rbList[5].setSelected(false);
+                        }
+
+                        pv.t3.clear();
+                        pv.rbList[5].setSelected(false);
+                    }
 
                 //Debugging
                 ArrayList<Consumers> consList = (ArrayList<Consumers>) pv.consumersList.clone();
@@ -210,39 +390,52 @@ public class MainView extends BorderPane {
                 System.out.println(pv.suppliersList);
                 pv.updateList();
 
-                //Addition of images to the correct boxes
+                //Addition of images to the correct boxes + tooltips for users to see amount of consumers/producers per image
 
                 for(int i = 0; i < cList.size(); i++){
                     if(pv.consumersList.get(i).getName().equals("house")){
                         if(rowCons == 0 && colCons == 0){
-                            gpConsumer.add(new ImageView(house), colCons, rowCons);
+                            ImageView h = new ImageView(house);
+                            //gpConsumer.add(new ImageView(house), colCons, rowCons); For reference in case something happens
+                            gpConsumer.add(h, colCons, rowCons);
+                            Tooltip.install(h, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " house(s)"));
                             colCons++;
                             pv.consumersList.remove(i);
                         }else if(colCons == 5){
                             colCons = 0;
                             rowCons++;
-                            gpConsumer.add(new ImageView(house), colCons, rowCons);
+                            ImageView h = new ImageView(house);
+                            gpConsumer.add(h, colCons, rowCons);
+                            Tooltip.install(h, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " house(s)"));
                             colCons++;
                             pv.consumersList.remove(i);
                         }else{
-                            gpConsumer.add(new ImageView(house), colCons, rowCons);
+                            ImageView h = new ImageView(house);
+                            gpConsumer.add(h, colCons, rowCons);
+                            Tooltip.install(h, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " house(s)"));
                             colCons++;
                             pv.consumersList.remove(i);
                         }
                     }
                     else if(pv.consumersList.get(i).getName().equals("building")){
                         if(rowCons == 0 && colCons == 0){
-                            gpConsumer.add(new ImageView(building), colCons, rowCons);
+                            ImageView b = new ImageView(building);
+                            gpConsumer.add(b, colCons, rowCons);
+                            Tooltip.install(b, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " building(s)"));
                             colCons++;
                             pv.consumersList.remove(i);
                         }else if(colCons == 5){
                             colCons = 0;
                             rowCons++;
-                            gpConsumer.add(new ImageView(building), colCons, rowCons);
+                            ImageView b = new ImageView(building);
+                            gpConsumer.add(b, colCons, rowCons);
+                            Tooltip.install(b, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " building(s)"));
                             colCons++;
                             pv.consumersList.remove(i);
                         }else{
-                            gpConsumer.add(new ImageView(building), colCons, rowCons);
+                            ImageView b = new ImageView(building);
+                            gpConsumer.add(b, colCons, rowCons);
+                            Tooltip.install(b, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " building(s)"));
                             colCons++;
                             pv.consumersList.remove(i);
                         }
@@ -251,70 +444,118 @@ public class MainView extends BorderPane {
                 for(int i = 0; i < sList.size(); i++){
                     if(pv.suppliersList.get(i).getName().equals("waterdam")){
                         if(rowSupp == 0 && colSupp == 0){
-                            gpSupplier.add(new ImageView(waterdam), colSupp, rowSupp);
+                            ImageView w = new ImageView(waterdam);
+                            gpSupplier.add(w, colSupp, rowSupp);
+                            Tooltip.install(w, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " waterdam(s)"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else if(colSupp == 5){
                             colSupp = 0;
                             rowSupp++;
-                            gpSupplier.add(new ImageView(waterdam), colSupp, rowSupp);
+                            ImageView w = new ImageView(waterdam);
+                            gpSupplier.add(w, colSupp, rowSupp);
+                            Tooltip.install(w, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " waterdam(s)"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else{
-                            gpSupplier.add(new ImageView(waterdam), colSupp, rowSupp);
+                            ImageView w = new ImageView(waterdam);
+                            gpSupplier.add(w, colSupp, rowSupp);
+                            Tooltip.install(w, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " waterdam(s)"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }
                     }else if(pv.suppliersList.get(i).getName().equals("windturbine")){
                         if(rowSupp == 0 && colSupp == 0){
-                            gpSupplier.add(new ImageView(windturbine), colSupp, rowSupp);
+                            ImageView win = new ImageView(windturbine);
+                            gpSupplier.add(win, colSupp, rowSupp);
+                            Tooltip.install(win, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " wind turbine(s)"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else if(colSupp == 5){
                             colSupp = 0;
                             rowSupp++;
-                            gpSupplier.add(new ImageView(windturbine), colSupp, rowSupp);
+                            ImageView win = new ImageView(windturbine);
+                            gpSupplier.add(win, colSupp, rowSupp);
+                            Tooltip.install(win, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " wind turbine(s)"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else{
-                            gpSupplier.add(new ImageView(windturbine), colSupp, rowSupp);
+                            ImageView win = new ImageView(windturbine);
+                            gpSupplier.add(win, colSupp, rowSupp);
+                            Tooltip.install(win, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " wind turbine(s)"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }
                     }else if(pv.suppliersList.get(i).getName().equals("solarpanel")){
                         if(rowSupp == 0 && colSupp == 0){
-                            gpSupplier.add(new ImageView(solarpanel), colSupp, rowSupp);
+                            ImageView s = new ImageView(solarpanel);
+                            gpSupplier.add(s, colSupp, rowSupp);
+                            Tooltip.install(s, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " solar panel(s)"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else if(colSupp == 5){
                             colSupp = 0;
                             rowSupp++;
-                            gpSupplier.add(new ImageView(solarpanel), colSupp, rowSupp);
+                            ImageView s = new ImageView(solarpanel);
+                            gpSupplier.add(s, colSupp, rowSupp);
+                            Tooltip.install(s, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " solar panel(s)"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else{
-                            gpSupplier.add(new ImageView(solarpanel), colSupp, rowSupp);
+                            ImageView s = new ImageView(solarpanel);
+                            gpSupplier.add(s, colSupp, rowSupp);
+                            Tooltip.install(s, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " solar panel(s)"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }
                     }else if(pv.suppliersList.get(i).getName().equals("npp")){
                         if(rowSupp == 0 && colSupp == 0){
-                            gpSupplier.add(new ImageView(npp), colSupp, rowSupp);
+                            ImageView np = new ImageView(npp);
+                            gpSupplier.add(np, colSupp, rowSupp);
+                            Tooltip.install(np, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " power plant(s)"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else if(colSupp == 5){
                             colSupp = 0;
                             rowSupp++;
-                            gpSupplier.add(new ImageView(npp), colSupp, rowSupp);
+                            ImageView np = new ImageView(npp);
+                            gpSupplier.add(np, colSupp, rowSupp);
+                            Tooltip.install(np, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " power plant(s)"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else{
-                            gpSupplier.add(new ImageView(npp), colSupp, rowSupp);
+                            ImageView np = new ImageView(npp);
+                            gpSupplier.add(np, colSupp, rowSupp);
+                            Tooltip.install(np, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " power plant(s)"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }
                     }
                 }
+            }
+        });
+
+        //Functionality of reset button (Clearing arrays and images from screen)
+
+        pv.resetButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                Main.getS().close();
+                totCons = 0;
+                totSupp = 0;
+                houseNum = 0;
+                buildingNum = 0;
+                hydroNum = 0;
+                windNum = 0;
+                solarNum = 0;
+                nppNum = 0;
+                Platform.runLater( () -> {
+                    try {
+                        new Main().start(new Stage());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
             }
         });
     }

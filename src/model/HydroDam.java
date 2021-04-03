@@ -39,6 +39,10 @@ public class HydroDam extends Suppliers{
         return name;
     }
 
+    public int getTotalProduction() {
+        return totalProduction;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -48,7 +52,7 @@ public class HydroDam extends Suppliers{
     }
 
     @Override
-    public void totalProduction(int power, int hours){
-        this.totalProduction = this.power*this.hours;
+    public void totalProduction(int power, int numOfX){
+        this.totalProduction = this.power*this.numberOfX;
     }
 }
