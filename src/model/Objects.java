@@ -1,5 +1,7 @@
 package src.model;
 
+//Abstract class for Consumers and Suppliers
+
 public abstract class Objects {
     protected int hours;
     protected int numberOfX;

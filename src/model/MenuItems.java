@@ -3,6 +3,8 @@ package src.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+//Creation of MenuItems
+
 public class MenuItems {
     private String itemName;
 

@@ -1,5 +1,7 @@
 package src.model;
 
+//Creation of WindFarm object
+
 public class WindFarm extends Suppliers{
 
     int power = 1500;

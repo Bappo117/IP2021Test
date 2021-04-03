@@ -1,5 +1,7 @@
 package src.model;
 
+//Creation of NPP object
+
 public class NuclearPowerPlant extends Suppliers{
 
     int power = 500;

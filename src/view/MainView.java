@@ -3,7 +3,6 @@ package src.view;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -12,12 +11,8 @@ import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import src.mainwindow.Main;
 import src.model.*;
-
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 public class MainView extends BorderPane {
     private MenuItems mi = new MenuItems();
@@ -26,7 +21,6 @@ public class MainView extends BorderPane {
     private MenuBar mb = new MenuBar();
     ParameterView pv = new ParameterView();
 
-    //ArrayList<Consumers> cl = new ArrayList<>();
     public static ArrayList<Consumers> cList = new ArrayList<>();
     public static ArrayList<Suppliers> sList = new ArrayList<>();
 
@@ -39,6 +33,8 @@ public class MainView extends BorderPane {
 
     public MainView() throws FileNotFoundException {
         super();
+
+        //Creation of menus
 
         Menu fileMenu = new Menu("_File");
         for (MenuItems m : fileData) {
@@ -58,91 +54,51 @@ public class MainView extends BorderPane {
 
         Scene scene = Main.getParaScene();
 
-        VBox supplierVBox = new VBox();
-        //supplierVBox.getChildren().add(new Text("Supplier section"));
+        //Creation of different sections
 
+        VBox supplierVBox = new VBox();
         try {
             supplierVBox.setPrefSize(scene.getWidth() * 0.4, scene.getHeight());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //supplierVBox.setStyle("-fx-background-color: red"); To show the area
-
 
         VBox consumerVBox = new VBox();
-        //consumerVBox.getChildren().add(new Text("Consumer section"));
         Line line1 = new Line(scene.getWidth() * 0.4, 0, scene.getWidth() * 0.4, scene.getHeight());
-
         try {
             consumerVBox.relocate(scene.getWidth() * 0.4, 0);
             consumerVBox.setPrefSize(scene.getWidth() * 0.4, scene.getHeight());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //consumerVBox.setStyle("-fx-background-color: orange"); To show the area
 
-        VBox parameterVBox = new VBox(/*8*/);
-        /*Text paramTitle = new Text("Parameter section");
-        paramTitle.setFont(Font.font(26));
-        parameterVBox.getChildren().add(paramTitle);*/
-
+        VBox parameterVBox = new VBox();
         Line line2 = new Line(scene.getWidth() * 0.8, 0, scene.getWidth() * 0.8, scene.getHeight());
-
         try {
             parameterVBox.relocate(scene.getWidth() * 0.8, 0);
             parameterVBox.setPrefSize(scene.getWidth() * 0.2, scene.getHeight());
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //parameterVBox.setStyle("-fx-background-color: yellow"); To show the area
+
+        //Adding sections to application
 
         Pane mainPane = new Pane();
         mainPane.getChildren().addAll(parameterVBox, supplierVBox, consumerVBox, line1, line2);
-
         this.setCenter(mainPane);
 
-        //THIS IS A TEST FOR THE TEXT FIELDS TO SEE IF THEY WORK AND HOW THEY WOULD LOOK LIKE
-/*
-        TextField testTextField = new TextField();
-        //testTextField.setPromptText("Enter a number"); If needed to put text inside of TextField
-        testTextField.setFocusTraversable(false); //Used to not prompt as the program starts
-        testTextField.setDisable(false); //Used to disable a text field
-        testTextField.setMaxWidth(100);
-        Button b = new Button("Add");
-*/
         //CHANGE THE POSITION OF THE PARAMETER SECTION IN THE @ParameterView CLASS TO CUSTOMIZE THE WHOLE SECTION
         parameterVBox.getChildren().add(pv);
 
-        //consumerVBox.getChildren().add(cv);
+        //GridPanes to add images of objects
 
         GridPane gpConsumer = new GridPane();
-        /*gpConsumer.setMinWidth(128);
-        gpConsumer.setMaxWidth(128);
-        gpConsumer.setMinHeight(100);
-        gpConsumer.setMaxHeight(100);*/
-        gpConsumer.minWidth(128);
-        gpConsumer.maxWidth(128);
-
         consumerVBox.getChildren().add(gpConsumer);
 
         GridPane gpSupplier = new GridPane();
         supplierVBox.getChildren().add(gpSupplier);
 
-        //ArrayList<Consumers> cl = new ArrayList<>();
-        //cl.add(new Houses(50, 50, 50));
-
-        //System.out.println(cl);
-
-        /*System.out.println(cList);
-        for (Consumers c :  cList) {
-            if (c.getName().equals("house")) {
-            Image house = new Image(new FileInputStream("images/house.png"));
-            ImageView ivh = new ImageView(house);
-            ivh.setFitHeight(100);
-            ivh.setFitWidth(128);
-            gp.add(ivh, 0, 0);
-            }
-        }*/
+        //Creation of the images to be added when creating a new object
 
         Image house = new Image("images/house.png", 128, 100, false, false);
         Image building = new Image("images/building.png", 128, 100, false, false);
@@ -151,12 +107,20 @@ public class MainView extends BorderPane {
         Image solarpanel = new Image("images/solarpanel.png", 128, 100, false, false);
         Image npp = new Image("images/npp.png", 128, 100, false, false);
 
+        //ArrayList to keep track of objects created
+
         ArrayList<Consumers> consumerArray = new ArrayList<>();
         ArrayList<Suppliers> supplierArray = new ArrayList<>();
+
+
+        //Whole functionality of the generate button (Creating objects from the selected object and adding images to the boxes)
 
         pv.generateButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+
+                //Creation of new objects
+
                 if(pv.rbList[0].isSelected() && pv.consumersList.size() < 40){
                     int numOfCons = Integer.parseInt(pv.t1.getText());
                     int hrsOfConsumption = Integer.parseInt(pv.t2.getText());
@@ -229,6 +193,8 @@ public class MainView extends BorderPane {
                     pv.t2.clear();
                     pv.t3.clear();
                 }
+
+                //Debugging
                 ArrayList<Consumers> consList = (ArrayList<Consumers>) pv.consumersList.clone();
                 System.out.println("ConsList: " + consList);
                 System.out.println();
@@ -243,6 +209,8 @@ public class MainView extends BorderPane {
                 System.out.println(pv.consumersList);
                 System.out.println(pv.suppliersList);
                 pv.updateList();
+
+                //Addition of images to the correct boxes
 
                 for(int i = 0; i < cList.size(); i++){
                     if(pv.consumersList.get(i).getName().equals("house")){
@@ -350,6 +318,8 @@ public class MainView extends BorderPane {
             }
         });
     }
+
+    //Event handlers for the different menus
 
     public void setOptionsHandler(EventHandler handler){
         mb.getMenus().get(0).getItems().get(0).setOnAction(handler);

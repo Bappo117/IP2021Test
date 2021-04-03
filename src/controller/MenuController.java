@@ -30,6 +30,8 @@ public class MenuController {
         mv.setAboutHandler(aeh);
     }
 
+    //Creates the Options window
+
     class OptionsEventHandler implements EventHandler{
         @Override
         public void handle(Event event){
@@ -53,12 +55,16 @@ public class MenuController {
         }
     }
 
+    //Closes the application
+
     class CloseEventHandler implements EventHandler{
         @Override
         public void handle(Event event){
             System.exit(0);
         }
     }
+
+    //Creates the About window
 
     class AboutEventHandler implements EventHandler{
         @Override

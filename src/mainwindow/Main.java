@@ -30,6 +30,8 @@ public class Main extends Application {
         stage.show();
     }
 
+    //Used by different classes to access the Stage and Scene of the application
+
     public static Stage getS(){
         return s;
     }

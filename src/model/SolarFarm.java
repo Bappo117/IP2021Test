@@ -1,5 +1,7 @@
 package src.model;
 
+//Creation of SolarFarm object
+
 public class SolarFarm extends Suppliers{
 
     int power = 750;

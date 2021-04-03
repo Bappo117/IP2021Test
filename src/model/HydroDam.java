@@ -1,5 +1,7 @@
 package src.model;
 
+//Creation of HydroDam object
+
 public class HydroDam extends Suppliers{
 
     int power = 1000;

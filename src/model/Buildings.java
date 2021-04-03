@@ -1,5 +1,7 @@
 package src.model;
 
+//Creation of Buildings object
+
 public class Buildings extends Consumers{
 
     int consumption = 200;

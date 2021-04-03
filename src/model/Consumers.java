@@ -1,5 +1,7 @@
 package src.model;
 
+//Abstract class for Consumers
+
 public abstract class Consumers extends Objects {
     protected int consumption;
     protected int totalConsumption;

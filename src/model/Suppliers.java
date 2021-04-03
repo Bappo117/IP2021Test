@@ -1,5 +1,7 @@
 package src.model;
 
+//Abstract class for Suppliers
+
 public abstract class Suppliers extends Objects{
     protected int power;
 
