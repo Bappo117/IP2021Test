@@ -148,9 +148,37 @@ public class MainView extends BorderPane {
                 //Creation of new objects
                 //Update Labels
                     if (pv.rbList[0].isSelected() && pv.consumersList.size() < 40) {
-                        int numOfCons = Integer.parseInt(pv.t1.getText());
-                        int hrsOfConsumption = Integer.parseInt(pv.t2.getText());
-                        Houses h1 = new Houses(50, hrsOfConsumption, numOfCons);
+                        //int numOfCons = Integer.parseInt(pv.t1.getText());
+                        //int hrsOfConsumption = Integer.parseInt(pv.t2.getText());
+
+                        String numOfCons = pv.t1.getText();
+                        String hrsOfConsumption = pv.t2.getText();
+                        boolean numeric1 = true;
+                        boolean numeric2 = true;
+                        numeric1 = numOfCons.matches("\\d{0,10}");
+                        numeric2 = hrsOfConsumption.matches("\\d{0,10}");
+
+                        if(!numeric1){
+                            pv.alertMessage.setText("Please enter a number");
+                            pv.t1.clear();
+                            pv.rbList[0].setSelected(false);
+                        }
+                        if(!numeric2){
+                            pv.alertMessage.setText("Please enter a number");
+                            pv.t1.clear();
+                            pv.rbList[0].setSelected(false);
+                        }
+
+                        int num = 0;
+                        int hrs = 0;
+
+                        try{
+                            num = Integer.parseInt(numOfCons);
+                            hrs = Integer.parseInt(hrsOfConsumption);
+                        }catch(NumberFormatException e){
+                        }
+
+                        Houses h1 = new Houses(50, hrs, num);
                         pv.consumersList.add(h1);
 
                         consumerArray.add(h1);
@@ -162,7 +190,7 @@ public class MainView extends BorderPane {
                         houseNum = houseNum + h1.getNumberOfX();
                         pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
 
-                        if(numOfCons < 1){
+                        if(num < 1){
                             pv.alertMessage.setText("Please enter an amount of consumers greater than 1");
                             pv.consumersList.remove(h1);
                             consumerArray.remove(h1);
@@ -177,7 +205,7 @@ public class MainView extends BorderPane {
                             pv.t2.clear();
                             pv.rbList[0].setSelected(false);
                         }
-                        else if(hrsOfConsumption < 1){
+                        else if(hrs < 1){
                             pv.alertMessage.setText("Please enter an amount of hours between 1 and 168");
                             pv.consumersList.remove(h1);
                             consumerArray.remove(h1);
@@ -198,9 +226,36 @@ public class MainView extends BorderPane {
                         pv.rbList[0].setSelected(false);
 
                     } else if (pv.rbList[1].isSelected() && pv.consumersList.size() < 40) {
-                        int numOfCons = Integer.parseInt(pv.t1.getText());
-                        int hrsOfConsumption = Integer.parseInt(pv.t2.getText());
-                        Buildings b1 = new Buildings(200, hrsOfConsumption, numOfCons);
+                        /*int numOfCons = Integer.parseInt(pv.t1.getText());
+                        int hrsOfConsumption = Integer.parseInt(pv.t2.getText());*/
+                        String numOfCons = pv.t1.getText();
+                        String hrsOfConsumption = pv.t2.getText();
+                        boolean numeric1 = true;
+                        boolean numeric2 = true;
+                        numeric1 = numOfCons.matches("\\d{0,10}");
+                        numeric2 = hrsOfConsumption.matches("\\d{0,10}");
+
+                        if(!numeric1){
+                            pv.alertMessage.setText("Please enter a number");
+                            pv.t1.clear();
+                            pv.rbList[1].setSelected(false);
+                        }
+                        if(!numeric2){
+                            pv.alertMessage.setText("Please enter a number");
+                            pv.t1.clear();
+                            pv.rbList[1].setSelected(false);
+                        }
+
+                        int num = 0;
+                        int hrs = 0;
+
+                        try{
+                            num = Integer.parseInt(numOfCons);
+                            hrs = Integer.parseInt(hrsOfConsumption);
+                        }catch(NumberFormatException e){
+                        }
+
+                        Buildings b1 = new Buildings(200, hrs, num);
                         pv.consumersList.add(b1);
 
                         consumerArray.add(b1);
@@ -212,7 +267,7 @@ public class MainView extends BorderPane {
                         buildingNum = buildingNum + b1.getNumberOfX();
                         pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
 
-                        if(numOfCons < 1){
+                        if(num < 1){
                             pv.alertMessage.setText("Please enter an amount of consumers greater than 1");
                             pv.consumersList.remove(b1);
                             consumerArray.remove(b1);
@@ -227,7 +282,7 @@ public class MainView extends BorderPane {
                             pv.t2.clear();
                             pv.rbList[1].setSelected(false);
                         }
-                        else if(hrsOfConsumption < 1){
+                        else if(hrs < 1){
                             pv.alertMessage.setText("Please enter an amount of hours between 1 and 168");
                             pv.consumersList.remove(b1);
                             consumerArray.remove(b1);
@@ -246,8 +301,29 @@ public class MainView extends BorderPane {
                         pv.t2.clear();
                         pv.rbList[1].setSelected(false);
                     } else if (pv.rbList[2].isSelected() && pv.suppliersList.size() < 40) {
-                        int numOfSup = Integer.parseInt(pv.t3.getText());
-                        HydroDam hd1 = new HydroDam(1000, numOfSup);
+                        //Comments are for future reference
+
+                        //int numOfSup = Integer.parseInt(pv.t3.getText());
+
+                        String numOfSup = pv.t3.getText();
+                        boolean numeric = true;
+                        numeric = numOfSup.matches("\\d{0,10}");
+
+                        if(!numeric){
+                            pv.alertMessage.setText("Please enter a number");
+                            pv.t3.clear();
+                            pv.rbList[2].setSelected(false);
+                        }
+
+                        int n = 0;
+
+                        try{
+                            n = Integer.parseInt(numOfSup);
+                        }catch(NumberFormatException e){
+
+                        }
+
+                        HydroDam hd1 = new HydroDam(1000, /*numOfSup*/ n);
                         pv.suppliersList.add(hd1);
 
                         supplierArray.add(hd1);
@@ -259,8 +335,7 @@ public class MainView extends BorderPane {
                         hydroNum = hydroNum + hd1.getNumberOfX();
                         pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
 
-
-                        if(numOfSup < 1){
+                        if(/*numOfSup*/ n < 1) {
                             pv.alertMessage.setText("Please enter an amount of producers greater than 1");
                             pv.suppliersList.remove(hd1);
 
@@ -268,7 +343,7 @@ public class MainView extends BorderPane {
                             totSupp = totSupp - hd1.getTotalProduction();
 
                             hydroNum = hydroNum - hd1.getNumberOfX();
-                            pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
+                            pv.setNumberLabel(houseNum, buildingNum, hydroNum, windNum, solarNum, nppNum);
 
                             pv.setEnergyLabel(totCons, totSupp);
                             pv.t3.clear();
@@ -278,8 +353,27 @@ public class MainView extends BorderPane {
                         pv.t3.clear();
                         pv.rbList[2].setSelected(false);
                     } else if (pv.rbList[3].isSelected() && pv.suppliersList.size() < 40) {
-                        int numOfSup = Integer.parseInt(pv.t3.getText());
-                        WindFarm wf1 = new WindFarm(1500, numOfSup);
+                        //int numOfSup = Integer.parseInt(pv.t3.getText());
+                        String numOfSup = pv.t3.getText();
+                        boolean numeric = true;
+                        numeric = numOfSup.matches("\\d{0,10}");
+
+                        if(!numeric){
+                            pv.alertMessage.setText("Please enter a number");
+                            pv.t3.clear();
+                            pv.rbList[3].setSelected(false);
+                        }
+
+                        int n = 0;
+
+                        try{
+                            n = Integer.parseInt(numOfSup);
+                        }catch(NumberFormatException e){
+
+                        }
+
+
+                        WindFarm wf1 = new WindFarm(1500, n);
                         pv.suppliersList.add(wf1);
 
                         supplierArray.add(wf1);
@@ -291,7 +385,7 @@ public class MainView extends BorderPane {
                         windNum = windNum + wf1.getNumberOfX();
                         pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
 
-                        if(numOfSup < 1){
+                        if(n < 1){
                             pv.alertMessage.setText("Please enter an amount of producers greater than 1");
                             pv.suppliersList.remove(wf1);
                             supplierArray.remove(wf1);
@@ -309,8 +403,27 @@ public class MainView extends BorderPane {
                         pv.t3.clear();
                         pv.rbList[3].setSelected(false);
                     } else if (pv.rbList[4].isSelected() && pv.suppliersList.size() < 40) {
-                        int numOfSup = Integer.parseInt(pv.t3.getText());
-                        SolarFarm sf1 = new SolarFarm(750, numOfSup);
+                        //int numOfSup = Integer.parseInt(pv.t3.getText());
+                        String numOfSup = pv.t3.getText();
+                        boolean numeric = true;
+                        numeric = numOfSup.matches("\\d{0,10}");
+
+                        if(!numeric){
+                            pv.alertMessage.setText("Please enter a number");
+                            pv.t3.clear();
+                            pv.rbList[4].setSelected(false);
+                        }
+
+                        int n = 0;
+
+                        try{
+                            n = Integer.parseInt(numOfSup);
+                        }catch(NumberFormatException e){
+
+                        }
+
+
+                        SolarFarm sf1 = new SolarFarm(750, n);
                         pv.suppliersList.add(sf1);
 
                         supplierArray.add(sf1);
@@ -322,7 +435,7 @@ public class MainView extends BorderPane {
                         solarNum = solarNum + sf1.getNumberOfX();
                         pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
 
-                        if(numOfSup < 1){
+                        if(n < 1){
                             pv.alertMessage.setText("Please enter an amount of producers greater than 1");
                             pv.suppliersList.remove(sf1);
                             supplierArray.remove(sf1);
@@ -340,8 +453,28 @@ public class MainView extends BorderPane {
                         pv.t3.clear();
                         pv.rbList[4].setSelected(false);
                     } else if (pv.rbList[5].isSelected() && pv.suppliersList.size() < 40) {
-                        int numOfSup = Integer.parseInt(pv.t3.getText());
-                        NuclearPowerPlant npp1 = new NuclearPowerPlant(500, numOfSup);
+                        //int numOfSup = Integer.parseInt(pv.t3.getText());
+
+                        String numOfSup = pv.t3.getText();
+                        boolean numeric = true;
+                        numeric = numOfSup.matches("\\d{0,10}");
+
+                        if(!numeric){
+                            pv.alertMessage.setText("Please enter a number");
+                            pv.t3.clear();
+                            pv.rbList[5].setSelected(false);
+                        }
+
+                        int n = 0;
+
+                        try{
+                            n = Integer.parseInt(numOfSup);
+                        }catch(NumberFormatException e){
+
+                        }
+
+
+                        NuclearPowerPlant npp1 = new NuclearPowerPlant(500, n);
                         pv.suppliersList.add(npp1);
 
                         supplierArray.add(npp1);
@@ -353,7 +486,7 @@ public class MainView extends BorderPane {
                         nppNum = nppNum + npp1.getNumberOfX();
                         pv.setNumberLabel(houseNum, buildingNum,hydroNum, windNum, solarNum, nppNum);
 
-                        if(numOfSup < 1){
+                        if(n < 1){
                             pv.alertMessage.setText("Please enter an amount of producers greater than 1");
                             pv.suppliersList.remove(npp1);
                             supplierArray.remove(npp1);
@@ -396,7 +529,7 @@ public class MainView extends BorderPane {
                             ImageView h = new ImageView(house);
                             //gpConsumer.add(new ImageView(house), colCons, rowCons); For reference in case something happens
                             gpConsumer.add(h, colCons, rowCons);
-                            Tooltip.install(h, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " house(s)"));
+                            Tooltip.install(h, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " house(s), " + pv.consumersList.get(i).getHours() + " hrs"));
                             colCons++;
                             pv.consumersList.remove(i);
                         }else if(colCons == 5){
@@ -404,13 +537,13 @@ public class MainView extends BorderPane {
                             rowCons++;
                             ImageView h = new ImageView(house);
                             gpConsumer.add(h, colCons, rowCons);
-                            Tooltip.install(h, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " house(s)"));
+                            Tooltip.install(h, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " house(s), " + pv.consumersList.get(i).getHours() + " hrs"));
                             colCons++;
                             pv.consumersList.remove(i);
                         }else{
                             ImageView h = new ImageView(house);
                             gpConsumer.add(h, colCons, rowCons);
-                            Tooltip.install(h, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " house(s)"));
+                            Tooltip.install(h, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " house(s), " + pv.consumersList.get(i).getHours() + " hrs"));
                             colCons++;
                             pv.consumersList.remove(i);
                         }
@@ -419,7 +552,7 @@ public class MainView extends BorderPane {
                         if(rowCons == 0 && colCons == 0){
                             ImageView b = new ImageView(building);
                             gpConsumer.add(b, colCons, rowCons);
-                            Tooltip.install(b, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " building(s)"));
+                            Tooltip.install(b, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " building(s), " + pv.consumersList.get(i).getHours() + " hrs"));
                             colCons++;
                             pv.consumersList.remove(i);
                         }else if(colCons == 5){
@@ -427,13 +560,13 @@ public class MainView extends BorderPane {
                             rowCons++;
                             ImageView b = new ImageView(building);
                             gpConsumer.add(b, colCons, rowCons);
-                            Tooltip.install(b, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " building(s)"));
+                            Tooltip.install(b, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " building(s), " + pv.consumersList.get(i).getHours() + " hrs"));
                             colCons++;
                             pv.consumersList.remove(i);
                         }else{
                             ImageView b = new ImageView(building);
                             gpConsumer.add(b, colCons, rowCons);
-                            Tooltip.install(b, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " building(s)"));
+                            Tooltip.install(b, new Tooltip(String.valueOf(pv.consumersList.get(i).getNumberOfX()) + " building(s), " + pv.consumersList.get(i).getHours() + " hrs"));
                             colCons++;
                             pv.consumersList.remove(i);
                         }
@@ -444,7 +577,7 @@ public class MainView extends BorderPane {
                         if(rowSupp == 0 && colSupp == 0){
                             ImageView w = new ImageView(waterdam);
                             gpSupplier.add(w, colSupp, rowSupp);
-                            Tooltip.install(w, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " waterdam(s)"));
+                            Tooltip.install(w, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " waterdam(s), " + pv.suppliersList.get(i).getTotalPower() + " kW/h"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else if(colSupp == 5){
@@ -452,13 +585,13 @@ public class MainView extends BorderPane {
                             rowSupp++;
                             ImageView w = new ImageView(waterdam);
                             gpSupplier.add(w, colSupp, rowSupp);
-                            Tooltip.install(w, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " waterdam(s)"));
+                            Tooltip.install(w, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " waterdam(s), " + pv.suppliersList.get(i).getTotalPower() + " kW/h"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else{
                             ImageView w = new ImageView(waterdam);
                             gpSupplier.add(w, colSupp, rowSupp);
-                            Tooltip.install(w, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " waterdam(s)"));
+                            Tooltip.install(w, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " waterdam(s), " + pv.suppliersList.get(i).getTotalPower() + " kW/h"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }
@@ -466,7 +599,7 @@ public class MainView extends BorderPane {
                         if(rowSupp == 0 && colSupp == 0){
                             ImageView win = new ImageView(windturbine);
                             gpSupplier.add(win, colSupp, rowSupp);
-                            Tooltip.install(win, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " wind turbine(s)"));
+                            Tooltip.install(win, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " wind turbine(s), " + pv.suppliersList.get(i).getTotalPower() + " kW/h"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else if(colSupp == 5){
@@ -474,13 +607,13 @@ public class MainView extends BorderPane {
                             rowSupp++;
                             ImageView win = new ImageView(windturbine);
                             gpSupplier.add(win, colSupp, rowSupp);
-                            Tooltip.install(win, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " wind turbine(s)"));
+                            Tooltip.install(win, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " wind turbine(s), " + pv.suppliersList.get(i).getTotalPower() + " kW/h"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else{
                             ImageView win = new ImageView(windturbine);
                             gpSupplier.add(win, colSupp, rowSupp);
-                            Tooltip.install(win, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " wind turbine(s)"));
+                            Tooltip.install(win, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " wind turbine(s), " + pv.suppliersList.get(i).getTotalPower() + " kW/h"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }
@@ -488,7 +621,7 @@ public class MainView extends BorderPane {
                         if(rowSupp == 0 && colSupp == 0){
                             ImageView s = new ImageView(solarpanel);
                             gpSupplier.add(s, colSupp, rowSupp);
-                            Tooltip.install(s, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " solar panel(s)"));
+                            Tooltip.install(s, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " solar panel(s), " + pv.suppliersList.get(i).getTotalPower() + " kW/h"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else if(colSupp == 5){
@@ -496,13 +629,13 @@ public class MainView extends BorderPane {
                             rowSupp++;
                             ImageView s = new ImageView(solarpanel);
                             gpSupplier.add(s, colSupp, rowSupp);
-                            Tooltip.install(s, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " solar panel(s)"));
+                            Tooltip.install(s, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " solar panel(s), " + pv.suppliersList.get(i).getTotalPower() + " kW/h"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else{
                             ImageView s = new ImageView(solarpanel);
                             gpSupplier.add(s, colSupp, rowSupp);
-                            Tooltip.install(s, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " solar panel(s)"));
+                            Tooltip.install(s, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " solar panel(s), " + pv.suppliersList.get(i).getTotalPower() + " kW/h"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }
@@ -510,7 +643,7 @@ public class MainView extends BorderPane {
                         if(rowSupp == 0 && colSupp == 0){
                             ImageView np = new ImageView(npp);
                             gpSupplier.add(np, colSupp, rowSupp);
-                            Tooltip.install(np, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " power plant(s)"));
+                            Tooltip.install(np, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " power plant(s), " + pv.suppliersList.get(i).getTotalPower() + " kW/h"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else if(colSupp == 5){
@@ -518,13 +651,13 @@ public class MainView extends BorderPane {
                             rowSupp++;
                             ImageView np = new ImageView(npp);
                             gpSupplier.add(np, colSupp, rowSupp);
-                            Tooltip.install(np, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " power plant(s)"));
+                            Tooltip.install(np, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " power plant(s), " + pv.suppliersList.get(i).getTotalPower() + " kW/h"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }else{
                             ImageView np = new ImageView(npp);
                             gpSupplier.add(np, colSupp, rowSupp);
-                            Tooltip.install(np, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " power plant(s)"));
+                            Tooltip.install(np, new Tooltip(String.valueOf(pv.suppliersList.get(i).getNumberOfX()) + " power plant(s), " + pv.suppliersList.get(i).getTotalPower() + " kW/h"));
                             colSupp++;
                             pv.suppliersList.remove(i);
                         }

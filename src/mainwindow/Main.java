@@ -21,7 +21,7 @@ public class Main extends Application {
 
         s = stage;
 
-        stage.setTitle("THIS IS FOR OUR IP PROJECT");
+        stage.setTitle("Power Consumption and Production");
 
         paraScene = new Scene(mv, paraScene.getWidth(), paraScene.getHeight());
 

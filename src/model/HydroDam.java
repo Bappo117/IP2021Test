@@ -25,6 +25,9 @@ public class HydroDam extends Suppliers{
         return power;
     }
 
+    public int getTotalPower(){
+        return power*numberOfX;
+    }
 
     public void setHours(int hours){
         this.hours = hours;

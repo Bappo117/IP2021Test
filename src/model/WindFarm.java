@@ -41,6 +41,10 @@ public class WindFarm extends Suppliers{
         return name;
     }
 
+    public int getTotalPower(){
+        return power*numberOfX;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
