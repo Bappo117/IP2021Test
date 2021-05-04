@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="IP2021Test:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/IP2021Test_jar</output-path>
+    <root id="archive" name="IP2021Test.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="module-output" name="IP2021Test" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/lib/src.zip" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/lib/javafx-swt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/lib/javafx.web.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/lib/javafx.base.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/lib/javafx.fxml.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/lib/javafx.media.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/lib/javafx.swing.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/lib/javafx.controls.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/lib/javafx.graphics.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -8,10 +8,16 @@ import javafx.stage.Stage;
 import src.model.MenuItems;
 import src.view.MainView;
 
-public class Main extends Application {
+class Main{
+    public static void main(String[] args){
+        Power.main(args);
+    }
+}
+
+public class Power extends Application {
     private static Stage s;
     static Pane pane = new Pane();
-    private static Scene paraScene = new Scene(pane, 1600, 800);
+    //private static Scene paraScene = new Scene(pane, 1600, 800);
 
     @Override
     public void start(Stage stage) throws Exception{
@@ -23,9 +29,11 @@ public class Main extends Application {
 
         stage.setTitle("Power Consumption and Production");
 
-        paraScene = new Scene(mv, paraScene.getWidth(), paraScene.getHeight());
+        //paraScene = new Scene(mv, paraScene.getWidth(), paraScene.getHeight());
+        Scene scene = new Scene(mv, 1600, 800);
 
-        stage.setScene(paraScene);
+        //stage.setScene(paraScene);
+        stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
     }
@@ -37,12 +45,12 @@ public class Main extends Application {
     }
 
     public static void setS(Stage s){
-        Main.s = s;
+        Power.s = s;
     }
 
-    public static Scene getParaScene(){
+    /*public static Scene getParaScene(){
         return paraScene;
-    }
+    }*/
 
     public static void main(String[] args) {
         launch(args);

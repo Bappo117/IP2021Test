@@ -12,9 +12,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import src.mainwindow.Main;
+import src.mainwindow.Power;
 import src.model.MenuItems;
 import src.view.MainView;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 public class MenuController {
     private MenuItems mi;
@@ -93,7 +96,30 @@ public class MenuController {
                                         "\nIt will also show how many structures were created in total, to paint a picture of the amount of objects created.");
 
 
-            Image parameters = new Image("images/parameters.png");
+            Image parameters = null;
+            Image buttons = null;
+            Image error1 = null;
+            Image error2 = null;
+            Image info = null;
+            Image radio = null;
+            Image proj = null;
+            Image tooltip = null;
+
+            try {
+                parameters = new Image(new FileInputStream("images/parameters.png"));
+                buttons = new Image(new FileInputStream("images/buttons.png"));
+                error1 = new Image(new FileInputStream("images/errormessage.png"));
+                error2 = new Image(new FileInputStream("images/errormessage2.png"));
+                info = new Image(new FileInputStream("images/information.png"));
+                radio = new Image(new FileInputStream("images/radiobuttons.png"));
+                proj = new Image(new FileInputStream("images/project.png"));
+                tooltip = new Image(new FileInputStream("images/tooltip.png"));
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+
+            /*Image parameters = new Image("images/parameters.png");
             Image buttons = new Image("images/buttons.png");
             Image error1 = new Image("images/errormessage.png");
             Image error2 = new Image("images/errormessage2.png");
@@ -101,13 +127,15 @@ public class MenuController {
             Image radio = new Image("images/radiobuttons.png");
             Image proj = new Image("images/project.png", 640, 387, false, false);
             Image tooltip = new Image("images/tooltip.png");
-
+*/
             ImageView param = new ImageView(parameters);
             ImageView rButtons = new ImageView(radio);
             ImageView contButtons = new ImageView(buttons);
             ImageView err1 = new ImageView(error1);
             ImageView err2 = new ImageView(error2);
             ImageView project = new ImageView(proj);
+            project.setFitWidth(640);
+            project.setFitHeight(387);
             ImageView tool = new ImageView(tooltip);
             ImageView information = new ImageView(info);
 
@@ -132,7 +160,7 @@ public class MenuController {
             Scene scene = new Scene(sp, 1000, 500);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.setResizable(false);
-            stage.initOwner(Main.getS());
+            stage.initOwner(Power.getS());
 
             stage.setTitle("About - Power Consumption and Production");
 

@@ -11,7 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
-import src.mainwindow.Main;
+import src.mainwindow.Power;
 import src.model.*;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -62,31 +62,31 @@ public class MainView extends BorderPane {
 
         this.setTop(mb);
 
-        Scene scene = Main.getParaScene();
+        //Scene scene = Main.getParaScene();
 
         //Creation of different sections
 
         VBox supplierVBox = new VBox();
         try {
-            supplierVBox.setPrefSize(scene.getWidth() * 0.4, scene.getHeight());
+            supplierVBox.setPrefSize(640, 800);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         VBox consumerVBox = new VBox();
-        Line line1 = new Line(scene.getWidth() * 0.4, 0, scene.getWidth() * 0.4, scene.getHeight());
+        Line line1 = new Line(640, 0, 640, 800);
         try {
-            consumerVBox.relocate(scene.getWidth() * 0.4, 0);
-            consumerVBox.setPrefSize(scene.getWidth() * 0.4, scene.getHeight());
+            consumerVBox.relocate(640, 0);
+            consumerVBox.setPrefSize(640, 800);
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         VBox parameterVBox = new VBox();
-        Line line2 = new Line(scene.getWidth() * 0.8, 0, scene.getWidth() * 0.8, scene.getHeight());
+        Line line2 = new Line(1280, 0, 1280, 800);
         try {
-            parameterVBox.relocate(scene.getWidth() * 0.8, 0);
-            parameterVBox.setPrefSize(scene.getWidth() * 0.2, scene.getHeight());
+            parameterVBox.relocate(1280, 0);
+            parameterVBox.setPrefSize(320, 800);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -671,7 +671,7 @@ public class MainView extends BorderPane {
         pv.resetButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Main.getS().close();
+                Power.getS().close();
                 totCons = 0;
                 totSupp = 0;
                 houseNum = 0;
@@ -682,7 +682,7 @@ public class MainView extends BorderPane {
                 nppNum = 0;
                 Platform.runLater( () -> {
                     try {
-                        new Main().start(new Stage());
+                        new Power().start(new Stage());
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
